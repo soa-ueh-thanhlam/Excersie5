@@ -71,6 +71,7 @@ Pull requests are welcome! If you want to contribute:
 This project is licensed under the **MIT License**.
 
 ## 🎯 Contact
-📧 Email: your-email@example.com  
-🔗 GitHub: [Your GitHub](https://github.com/your-profile)
+📧 **Email:** [lamdoan1122334455@gmail.com](mailto:lamdoan1122334455@gmail.com)  
+🔗 **GitHub:** [thanhlamcode](https://github.com/thanhlamcode)
+
 

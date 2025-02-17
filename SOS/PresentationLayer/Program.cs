@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using SOS.BusinessLayer;
-using SOS.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using SOS.PersistenceLayer;
 
 namespace SOS.PresentationLayer
@@ -11,68 +7,14 @@ namespace SOS.PresentationLayer
     {
         static void Main()
         {
-            // Thiết lập mã hóa UTF-8 để hiển thị đúng tiếng Việt
-            Console.OutputEncoding = Encoding.UTF8;
-
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseSqlServer("Server=localhost;Database=MYAPP;Trusted_Connection=True;")
                 .Options;
 
             using (var context = new AppDbContext(options))
             {
-                CustomerObject customerObject = new CustomerObject(context);
-
-                while (true)
-                {
-                    Console.WriteLine("\n🔹 Chọn chức năng:");
-                    Console.WriteLine("1️⃣ Thêm khách hàng");
-                    Console.WriteLine("2️⃣ Xem danh sách khách hàng");
-                    Console.WriteLine("3️⃣ Thêm đơn hàng");
-                    Console.WriteLine("4️⃣ Xem đơn hàng của khách hàng");
-                    Console.WriteLine("5️⃣ Thoát");
-                    Console.Write("🔸 Lựa chọn: ");
-                    string choice = Console.ReadLine();
-
-                    if (choice == "1")
-                    {
-                        Console.Write("📝 Nhập tên khách hàng: ");
-                        string name = Console.ReadLine();
-                        customerObject.AddCustomer(new Customer { Name = name });
-                        Console.WriteLine("✅ Khách hàng đã được thêm thành công!");
-                    }
-                    else if (choice == "2")
-                    {
-                        var customers = customerObject.GetAllCustomers();
-                        Console.WriteLine("\n📌 Danh sách khách hàng:");
-                        customers.ForEach(c => Console.WriteLine($"🔹 ID: {c.Id}, Tên: {c.Name}"));
-                    }
-                    else if (choice == "3")
-                    {
-                        Console.Write("📌 Nhập ID khách hàng: ");
-                        int customerId = int.Parse(Console.ReadLine());
-                        Console.Write("📝 Nhập mô tả đơn hàng: ");
-                        string details = Console.ReadLine();
-                        customerObject.PlaceOrder(new Order { CustomerId = customerId, OrderDetails = details });
-                        Console.WriteLine("✅ Đơn hàng đã được thêm thành công!");
-                    }
-                    else if (choice == "4")
-                    {
-                        Console.Write("📌 Nhập ID khách hàng: ");
-                        int customerId = int.Parse(Console.ReadLine());
-                        var orders = customerObject.GetCustomerOrders(customerId);
-                        Console.WriteLine("\n📌 Danh sách đơn hàng:");
-                        orders.ForEach(o => Console.WriteLine($"🛒 ID: {o.Id}, Chi tiết: {o.OrderDetails}"));
-                    }
-                    else if (choice == "5")
-                    {
-                        Console.WriteLine("👋 Chương trình kết thúc. Hẹn gặp lại!");
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("⚠️ Lựa chọn không hợp lệ. Vui lòng nhập lại!");
-                    }
-                }
+                UserInterface ui = new UserInterface(context);
+                ui.Run(); // Gọi giao diện để chạy chương trình
             }
         }
     }

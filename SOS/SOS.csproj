@@ -163,6 +163,7 @@
     <Compile Include="PersistenceLayer\AppDbContext.cs" />
     <Compile Include="PersistenceLayer\CustomerDAO.cs" />
     <Compile Include="PersistenceLayer\OrderDAO.cs" />
+    <Compile Include="PresentationLayer\UserInterface.cs" />
     <Compile Include="PresentationLayer\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
